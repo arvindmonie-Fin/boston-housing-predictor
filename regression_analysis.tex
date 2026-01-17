@@ -1,0 +1,811 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Multiple Regression Analysis: Boston Housing Dataset},
+  pdfauthor={Karen Monie},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Multiple Regression Analysis: Boston Housing Dataset}
+\author{Karen Monie}
+\date{2026-01-17}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\section{Conclusion}\label{conclusion}
+
+This multiple regression analysis of the Boston Housing Dataset reveals
+several important relationships between neighborhood characteristics and
+median home values. The model explains a substantial portion of the
+variance in housing values, indicating that the selected predictors
+capture significant variation in property values.
+
+Key findings from the analysis include:
+
+\begin{itemize}
+\tightlist
+\item
+  The model is statistically significant overall, as indicated by the
+  F-statistic
+\item
+  Several predictor variables show significant relationships with median
+  home values
+\item
+  Diagnostic plots help assess whether the regression assumptions are
+  met
+\item
+  The relationship between predictors and the response variable can be
+  visualized through scatter plots
+\end{itemize}
+
+The diagnostic plots provide insights into model adequacy: - The fitted
+vs actual plot shows how well the model predicts housing values -
+Residual plots help identify potential violations of regression
+assumptions - Q-Q plots assess the normality of residuals
+
+This analysis provides a foundation for understanding the factors that
+influence housing values in the Boston area and can be extended with
+additional model specifications, transformations, or variable selection
+techniques.
+
+\section{Introduction}\label{introduction}
+
+This report presents a multiple regression analysis of the Boston
+Housing Dataset. The objective is to model the relationship between the
+median value of owner-occupied homes (medv) and various neighborhood
+characteristics. Multiple regression allows us to examine how several
+predictor variables simultaneously influence housing values, providing
+insights into the factors that contribute to property valuation in the
+Boston area.
+
+The analysis includes: - Data exploration and summary statistics - Model
+specification and estimation - Model diagnostics to assess assumptions -
+Visualization of relationships and model fit - Interpretation of results
+
+\section{Data Loading and
+Exploration}\label{data-loading-and-exploration}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load required libraries}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(knitr)}
+\FunctionTok{library}\NormalTok{(kableExtra)}
+
+\CommentTok{\# Load the Boston Housing Dataset}
+\NormalTok{boston }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Boston Housing Dataset.csv"}\NormalTok{, }\AttributeTok{stringsAsFactors =} \ConstantTok{FALSE}\NormalTok{)}
+
+\CommentTok{\# Remove the first column (row index) if it exists}
+\ControlFlowTok{if}\NormalTok{(}\FunctionTok{names}\NormalTok{(boston)[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{==} \StringTok{"X"} \SpecialCharTok{||} \FunctionTok{names}\NormalTok{(boston)[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{==} \StringTok{""}\NormalTok{) \{}
+\NormalTok{  boston }\OtherTok{\textless{}{-}}\NormalTok{ boston[, }\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]}
+\NormalTok{\}}
+
+\CommentTok{\# Display basic information about the dataset}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Dataset Dimensions:"}\NormalTok{, }\FunctionTok{dim}\NormalTok{(boston)[}\DecValTok{1}\NormalTok{], }\StringTok{"observations,"}\NormalTok{, }\FunctionTok{dim}\NormalTok{(boston)[}\DecValTok{2}\NormalTok{], }\StringTok{"variables}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Dataset Dimensions: 506 observations, 14 variables
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Variable Names:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Variable Names:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{names}\NormalTok{(boston))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "crim"    "zn"      "indus"   "chas"    "nox"     "rm"      "age"    
+##  [8] "dis"     "rad"     "tax"     "ptratio" "black"   "lstat"   "medv"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Display summary statistics}
+\NormalTok{summary\_stats }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(boston)}
+\FunctionTok{print}\NormalTok{(summary\_stats)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       crim                zn             indus            chas        
+##  Min.   : 0.00632   Min.   :  0.00   Min.   : 0.46   Min.   :0.00000  
+##  1st Qu.: 0.08205   1st Qu.:  0.00   1st Qu.: 5.19   1st Qu.:0.00000  
+##  Median : 0.25651   Median :  0.00   Median : 9.69   Median :0.00000  
+##  Mean   : 3.61352   Mean   : 11.36   Mean   :11.14   Mean   :0.06917  
+##  3rd Qu.: 3.67708   3rd Qu.: 12.50   3rd Qu.:18.10   3rd Qu.:0.00000  
+##  Max.   :88.97620   Max.   :100.00   Max.   :27.74   Max.   :1.00000  
+##       nox               rm             age              dis        
+##  Min.   :0.3850   Min.   :3.561   Min.   :  2.90   Min.   : 1.130  
+##  1st Qu.:0.4490   1st Qu.:5.886   1st Qu.: 45.02   1st Qu.: 2.100  
+##  Median :0.5380   Median :6.208   Median : 77.50   Median : 3.207  
+##  Mean   :0.5547   Mean   :6.285   Mean   : 68.57   Mean   : 3.795  
+##  3rd Qu.:0.6240   3rd Qu.:6.623   3rd Qu.: 94.08   3rd Qu.: 5.188  
+##  Max.   :0.8710   Max.   :8.780   Max.   :100.00   Max.   :12.127  
+##       rad              tax           ptratio          black       
+##  Min.   : 1.000   Min.   :187.0   Min.   :12.60   Min.   :  0.32  
+##  1st Qu.: 4.000   1st Qu.:279.0   1st Qu.:17.40   1st Qu.:375.38  
+##  Median : 5.000   Median :330.0   Median :19.05   Median :391.44  
+##  Mean   : 9.549   Mean   :408.2   Mean   :18.46   Mean   :356.67  
+##  3rd Qu.:24.000   3rd Qu.:666.0   3rd Qu.:20.20   3rd Qu.:396.23  
+##  Max.   :24.000   Max.   :711.0   Max.   :22.00   Max.   :396.90  
+##      lstat            medv      
+##  Min.   : 1.73   Min.   : 5.00  
+##  1st Qu.: 6.95   1st Qu.:17.02  
+##  Median :11.36   Median :21.20  
+##  Mean   :12.65   Mean   :22.53  
+##  3rd Qu.:16.95   3rd Qu.:25.00  
+##  Max.   :37.97   Max.   :50.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Display first few rows}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{First 6 rows of the dataset:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## First 6 rows of the dataset:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(boston), }\AttributeTok{caption =} \StringTok{"First 6 observations of the Boston Housing Dataset"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{latex\_options =} \FunctionTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"hold\_position"}\NormalTok{), }\AttributeTok{font\_size =} \DecValTok{9}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begingroup\fontsize{9}{11}\selectfont
+
+\begin{longtable}[t]{rrrrrrrrrrrrrr}
+\caption{\label{tab:data-structure}First 6 observations of the Boston Housing Dataset}\\
+\toprule
+crim & zn & indus & chas & nox & rm & age & dis & rad & tax & ptratio & black & lstat & medv\\
+\midrule
+\cellcolor{gray!10}{0.00632} & \cellcolor{gray!10}{18} & \cellcolor{gray!10}{2.31} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0.538} & \cellcolor{gray!10}{6.575} & \cellcolor{gray!10}{65.2} & \cellcolor{gray!10}{4.0900} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{296} & \cellcolor{gray!10}{15.3} & \cellcolor{gray!10}{396.90} & \cellcolor{gray!10}{4.98} & \cellcolor{gray!10}{24.0}\\
+0.02731 & 0 & 7.07 & 0 & 0.469 & 6.421 & 78.9 & 4.9671 & 2 & 242 & 17.8 & 396.90 & 9.14 & 21.6\\
+\cellcolor{gray!10}{0.02729} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{7.07} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0.469} & \cellcolor{gray!10}{7.185} & \cellcolor{gray!10}{61.1} & \cellcolor{gray!10}{4.9671} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{242} & \cellcolor{gray!10}{17.8} & \cellcolor{gray!10}{392.83} & \cellcolor{gray!10}{4.03} & \cellcolor{gray!10}{34.7}\\
+0.03237 & 0 & 2.18 & 0 & 0.458 & 6.998 & 45.8 & 6.0622 & 3 & 222 & 18.7 & 394.63 & 2.94 & 33.4\\
+\cellcolor{gray!10}{0.06905} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{2.18} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0.458} & \cellcolor{gray!10}{7.147} & \cellcolor{gray!10}{54.2} & \cellcolor{gray!10}{6.0622} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{222} & \cellcolor{gray!10}{18.7} & \cellcolor{gray!10}{396.90} & \cellcolor{gray!10}{5.33} & \cellcolor{gray!10}{36.2}\\
+\addlinespace
+0.02985 & 0 & 2.18 & 0 & 0.458 & 6.430 & 58.7 & 6.0622 & 3 & 222 & 18.7 & 394.12 & 5.21 & 28.7\\
+\bottomrule
+\end{longtable}
+\endgroup{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Check for missing values}
+\NormalTok{missing\_values }\OtherTok{\textless{}{-}} \FunctionTok{colSums}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(boston))}
+\ControlFlowTok{if}\NormalTok{(}\FunctionTok{sum}\NormalTok{(missing\_values) }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{) \{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Missing values per variable:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+  \FunctionTok{print}\NormalTok{(missing\_values[missing\_values }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{])}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{No missing values found in the dataset.}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## No missing values found in the dataset.
+\end{verbatim}
+
+\section{Model Specification}\label{model-specification}
+
+The multiple regression model is specified as:
+
+\[medv = \beta_0 + \beta_1 \cdot crim + \beta_2 \cdot zn + \beta_3 \cdot indus + \beta_4 \cdot nox + \beta_5 \cdot rm + \beta_6 \cdot age + \beta_7 \cdot dis + \beta_8 \cdot rad + \beta_9 \cdot tax + \beta_{10} \cdot ptratio + \beta_{11} \cdot black + \beta_{12} \cdot lstat + \epsilon\]
+
+Where: - \textbf{medv} is the median value of owner-occupied homes
+(response variable) - \textbf{crim} through \textbf{lstat} are the
+predictor variables - \(\beta_0\) is the intercept - \(\beta_1\) through
+\(\beta_{12}\) are the regression coefficients - \(\epsilon\) is the
+error term
+
+Note: The variable \textbf{chas} (Charles River dummy variable) is
+excluded from this model but could be included in alternative
+specifications.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fit the multiple regression model}
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(medv }\SpecialCharTok{\textasciitilde{}}\NormalTok{ crim }\SpecialCharTok{+}\NormalTok{ zn }\SpecialCharTok{+}\NormalTok{ indus }\SpecialCharTok{+}\NormalTok{ nox }\SpecialCharTok{+}\NormalTok{ rm }\SpecialCharTok{+}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ dis }\SpecialCharTok{+}\NormalTok{ rad }\SpecialCharTok{+}\NormalTok{ tax }\SpecialCharTok{+}\NormalTok{ ptratio }\SpecialCharTok{+}\NormalTok{ black }\SpecialCharTok{+}\NormalTok{ lstat, }
+            \AttributeTok{data =}\NormalTok{ boston)}
+
+\CommentTok{\# Display model summary}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Model Summary:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Model Summary:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = medv ~ crim + zn + indus + nox + rm + age + dis + 
+##     rad + tax + ptratio + black + lstat, data = boston)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -13.3968  -2.8103  -0.6455   1.9141  26.3755 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  36.891960   5.146516   7.168 2.79e-12 ***
+## crim         -0.113139   0.033113  -3.417 0.000686 ***
+## zn            0.047052   0.013847   3.398 0.000734 ***
+## indus         0.040311   0.061707   0.653 0.513889    
+## nox         -17.366999   3.851224  -4.509 8.13e-06 ***
+## rm            3.850492   0.421402   9.137  < 2e-16 ***
+## age           0.002784   0.013309   0.209 0.834407    
+## dis          -1.485374   0.201187  -7.383 6.64e-13 ***
+## rad           0.328311   0.066542   4.934 1.10e-06 ***
+## tax          -0.013756   0.003766  -3.653 0.000287 ***
+## ptratio      -0.990958   0.131399  -7.542 2.25e-13 ***
+## black         0.009741   0.002706   3.600 0.000351 ***
+## lstat        -0.534158   0.051072 -10.459  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 4.787 on 493 degrees of freedom
+## Multiple R-squared:  0.7355, Adjusted R-squared:  0.7291 
+## F-statistic: 114.3 on 12 and 493 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+\section{Results}\label{results}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Extract and format coefficients}
+\NormalTok{coef\_table }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(model)}\SpecialCharTok{$}\NormalTok{coefficients}
+\NormalTok{coef\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Variable =} \FunctionTok{rownames}\NormalTok{(coef\_table),}
+  \AttributeTok{Estimate =} \FunctionTok{round}\NormalTok{(coef\_table[, }\StringTok{"Estimate"}\NormalTok{], }\DecValTok{4}\NormalTok{),}
+  \AttributeTok{Std\_Error =} \FunctionTok{round}\NormalTok{(coef\_table[, }\StringTok{"Std. Error"}\NormalTok{], }\DecValTok{4}\NormalTok{),}
+  \AttributeTok{t\_value =} \FunctionTok{round}\NormalTok{(coef\_table[, }\StringTok{"t value"}\NormalTok{], }\DecValTok{3}\NormalTok{),}
+  \AttributeTok{p\_value =} \FunctionTok{format.pval}\NormalTok{(coef\_table[, }\StringTok{"Pr(\textgreater{}|t|)"}\NormalTok{], }\AttributeTok{digits =} \DecValTok{3}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{\# Create bold vector for significant p{-}values}
+\NormalTok{p\_numeric }\OtherTok{\textless{}{-}}\NormalTok{ coef\_table[, }\StringTok{"Pr(\textgreater{}|t|)"}\NormalTok{]}
+\NormalTok{bold\_cols }\OtherTok{\textless{}{-}}\NormalTok{ p\_numeric }\SpecialCharTok{\textless{}} \FloatTok{0.05}
+
+\FunctionTok{kable}\NormalTok{(coef\_df, }\AttributeTok{caption =} \StringTok{"Regression Coefficients and Significance Tests"}\NormalTok{, }
+      \AttributeTok{col.names =} \FunctionTok{c}\NormalTok{(}\StringTok{"Variable"}\NormalTok{, }\StringTok{"Estimate"}\NormalTok{, }\StringTok{"Std. Error"}\NormalTok{, }\StringTok{"t{-}value"}\NormalTok{, }\StringTok{"p{-}value"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{latex\_options =} \FunctionTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"hold\_position"}\NormalTok{), }\AttributeTok{font\_size =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{column\_spec}\NormalTok{(}\DecValTok{5}\NormalTok{, }\AttributeTok{bold =}\NormalTok{ bold\_cols)}
+\end{Highlighting}
+\end{Shaded}
+
+\begingroup\fontsize{9}{11}\selectfont
+
+\begin{longtable}[t]{llrr>{}rl}
+\caption{\label{tab:model-coefficients}Regression Coefficients and Significance Tests}\\
+\toprule
+ & Variable & Estimate & Std. Error & t-value & p-value\\
+\midrule
+\cellcolor{gray!10}{(Intercept)} & \cellcolor{gray!10}{(Intercept)} & \cellcolor{gray!10}{36.8920} & \cellcolor{gray!10}{5.1465} & \textbf{\cellcolor{gray!10}{7.168}} & \cellcolor{gray!10}{2.79e-12}\\
+crim & crim & -0.1131 & 0.0331 & \textbf{-3.417} & 0.000686\\
+\cellcolor{gray!10}{zn} & \cellcolor{gray!10}{zn} & \cellcolor{gray!10}{0.0471} & \cellcolor{gray!10}{0.0138} & \textbf{\cellcolor{gray!10}{3.398}} & \cellcolor{gray!10}{0.000734}\\
+indus & indus & 0.0403 & 0.0617 & 0.653 & 0.513889\\
+\cellcolor{gray!10}{nox} & \cellcolor{gray!10}{nox} & \cellcolor{gray!10}{-17.3670} & \cellcolor{gray!10}{3.8512} & \textbf{\cellcolor{gray!10}{-4.509}} & \cellcolor{gray!10}{8.13e-06}\\
+\addlinespace
+rm & rm & 3.8505 & 0.4214 & \textbf{9.137} & < 2e-16\\
+\cellcolor{gray!10}{age} & \cellcolor{gray!10}{age} & \cellcolor{gray!10}{0.0028} & \cellcolor{gray!10}{0.0133} & \cellcolor{gray!10}{0.209} & \cellcolor{gray!10}{0.834407}\\
+dis & dis & -1.4854 & 0.2012 & \textbf{-7.383} & 6.64e-13\\
+\cellcolor{gray!10}{rad} & \cellcolor{gray!10}{rad} & \cellcolor{gray!10}{0.3283} & \cellcolor{gray!10}{0.0665} & \textbf{\cellcolor{gray!10}{4.934}} & \cellcolor{gray!10}{1.10e-06}\\
+tax & tax & -0.0138 & 0.0038 & \textbf{-3.653} & 0.000287\\
+\addlinespace
+\cellcolor{gray!10}{ptratio} & \cellcolor{gray!10}{ptratio} & \cellcolor{gray!10}{-0.9910} & \cellcolor{gray!10}{0.1314} & \textbf{\cellcolor{gray!10}{-7.542}} & \cellcolor{gray!10}{2.25e-13}\\
+black & black & 0.0097 & 0.0027 & \textbf{3.600} & 0.000351\\
+\cellcolor{gray!10}{lstat} & \cellcolor{gray!10}{lstat} & \cellcolor{gray!10}{-0.5342} & \cellcolor{gray!10}{0.0511} & \textbf{\cellcolor{gray!10}{-10.459}} & \cellcolor{gray!10}{< 2e-16}\\
+\bottomrule
+\end{longtable}
+\endgroup{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Extract model fit statistics}
+\NormalTok{r\_squared }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(model)}\SpecialCharTok{$}\NormalTok{r.squared}
+\NormalTok{adj\_r\_squared }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(model)}\SpecialCharTok{$}\NormalTok{adj.r.squared}
+\NormalTok{f\_statistic }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(model)}\SpecialCharTok{$}\NormalTok{fstatistic[}\DecValTok{1}\NormalTok{]}
+\NormalTok{f\_pvalue }\OtherTok{\textless{}{-}} \FunctionTok{pf}\NormalTok{(}\FunctionTok{summary}\NormalTok{(model)}\SpecialCharTok{$}\NormalTok{fstatistic[}\DecValTok{1}\NormalTok{], }
+               \FunctionTok{summary}\NormalTok{(model)}\SpecialCharTok{$}\NormalTok{fstatistic[}\DecValTok{2}\NormalTok{], }
+               \FunctionTok{summary}\NormalTok{(model)}\SpecialCharTok{$}\NormalTok{fstatistic[}\DecValTok{3}\NormalTok{], }
+               \AttributeTok{lower.tail =} \ConstantTok{FALSE}\NormalTok{)}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Model Fit Statistics:}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Model Fit Statistics:
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"R{-}squared:"}\NormalTok{, }\FunctionTok{round}\NormalTok{(r\_squared, }\DecValTok{4}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## R-squared: 0.7355
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Adjusted R{-}squared:"}\NormalTok{, }\FunctionTok{round}\NormalTok{(adj\_r\_squared, }\DecValTok{4}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Adjusted R-squared: 0.7291
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"F{-}statistic:"}\NormalTok{, }\FunctionTok{round}\NormalTok{(f\_statistic, }\DecValTok{2}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## F-statistic: 114.25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"F{-}statistic p{-}value:"}\NormalTok{, }\FunctionTok{format.pval}\NormalTok{(f\_pvalue, }\AttributeTok{digits =} \DecValTok{3}\NormalTok{), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## F-statistic p-value: <2e-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Residual standard error:"}\NormalTok{, }\FunctionTok{round}\NormalTok{(}\FunctionTok{summary}\NormalTok{(model)}\SpecialCharTok{$}\NormalTok{sigma, }\DecValTok{2}\NormalTok{), }\StringTok{"on"}\NormalTok{, }\FunctionTok{summary}\NormalTok{(model)}\SpecialCharTok{$}\NormalTok{df[}\DecValTok{2}\NormalTok{], }\StringTok{"degrees of freedom}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Residual standard error: 4.79 on 493 degrees of freedom
+\end{verbatim}
+
+\subsection{Interpretation}\label{interpretation}
+
+The model explains approximately 73.6\% of the variance in median home
+values (R² = 0.7355). The adjusted R² of 0.7291 accounts for the number
+of predictors in the model.
+
+The F-statistic (114.25) with a p-value of \textless2e-16 indicates that
+the model is statistically significant overall, meaning that at least
+one of the predictor variables has a significant relationship with
+median home values.
+
+\section{Model Diagnostics}\label{model-diagnostics}
+
+\subsection{Residual Analysis}\label{residual-analysis}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create fitted vs actual plot}
+\NormalTok{fitted\_values }\OtherTok{\textless{}{-}} \FunctionTok{fitted}\NormalTok{(model)}
+\NormalTok{actual\_values }\OtherTok{\textless{}{-}}\NormalTok{ boston}\SpecialCharTok{$}\NormalTok{medv}
+
+\NormalTok{p1 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Fitted =}\NormalTok{ fitted\_values, }\AttributeTok{Actual =}\NormalTok{ actual\_values), }
+             \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Fitted, }\AttributeTok{y =}\NormalTok{ Actual)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{color =} \StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_abline}\NormalTok{(}\AttributeTok{intercept =} \DecValTok{0}\NormalTok{, }\AttributeTok{slope =} \DecValTok{1}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{linewidth =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Fitted vs Actual Values"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Fitted Values (Predicted medv)"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Actual Values (medv)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{))}
+
+\FunctionTok{print}\NormalTok{(p1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{regression_analysis_files/figure-latex/fitted-actual-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Residuals vs fitted values}
+\NormalTok{residuals }\OtherTok{\textless{}{-}} \FunctionTok{resid}\NormalTok{(model)}
+
+\NormalTok{p2 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Fitted =}\NormalTok{ fitted\_values, }\AttributeTok{Residuals =}\NormalTok{ residuals), }
+             \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Fitted, }\AttributeTok{y =}\NormalTok{ Residuals)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{color =} \StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_hline}\NormalTok{(}\AttributeTok{yintercept =} \DecValTok{0}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{linewidth =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"loess"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{color =} \StringTok{"darkgreen"}\NormalTok{, }\AttributeTok{linewidth =} \FloatTok{0.8}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Residuals vs Fitted Values"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Fitted Values"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Residuals"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{))}
+
+\FunctionTok{print}\NormalTok{(p2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{regression_analysis_files/figure-latex/residual-plot-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Q{-}Q plot for normality of residuals}
+\NormalTok{p3 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Residuals =}\NormalTok{ residuals), }\FunctionTok{aes}\NormalTok{(}\AttributeTok{sample =}\NormalTok{ Residuals)) }\SpecialCharTok{+}
+  \FunctionTok{stat\_qq}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{color =} \StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{stat\_qq\_line}\NormalTok{(}\AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{linewidth =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Q{-}Q Plot of Residuals"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Theoretical Quantiles"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Sample Quantiles"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{))}
+
+\FunctionTok{print}\NormalTok{(p3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{regression_analysis_files/figure-latex/qq-plot-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Residuals vs selected predictors}
+\NormalTok{p4 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{rm =}\NormalTok{ boston}\SpecialCharTok{$}\NormalTok{rm, }\AttributeTok{Residuals =}\NormalTok{ residuals), }
+             \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ rm, }\AttributeTok{y =}\NormalTok{ Residuals)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{color =} \StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_hline}\NormalTok{(}\AttributeTok{yintercept =} \DecValTok{0}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{linewidth =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"loess"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{color =} \StringTok{"darkgreen"}\NormalTok{, }\AttributeTok{linewidth =} \FloatTok{0.8}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Residuals vs Number of Rooms (rm)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Average Number of Rooms"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Residuals"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{))}
+
+\FunctionTok{print}\NormalTok{(p4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{regression_analysis_files/figure-latex/residuals-vs-predictors-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p5 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{lstat =}\NormalTok{ boston}\SpecialCharTok{$}\NormalTok{lstat, }\AttributeTok{Residuals =}\NormalTok{ residuals), }
+             \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ lstat, }\AttributeTok{y =}\NormalTok{ Residuals)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{color =} \StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_hline}\NormalTok{(}\AttributeTok{yintercept =} \DecValTok{0}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{linewidth =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"loess"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{color =} \StringTok{"darkgreen"}\NormalTok{, }\AttributeTok{linewidth =} \FloatTok{0.8}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Residuals vs Lower Status Population \% (lstat)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Lower Status Population (\%)"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Residuals"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{))}
+
+\FunctionTok{print}\NormalTok{(p5)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{regression_analysis_files/figure-latex/residuals-vs-predictors-2} \end{center}
+
+\subsection{Diagnostic Interpretation}\label{diagnostic-interpretation}
+
+The diagnostic plots help assess the regression assumptions:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Fitted vs Actual Plot}: Shows how well the model predicts the
+  actual values. Points should cluster around the diagonal line (red
+  dashed).
+\item
+  \textbf{Residual Plot}: Tests for homoscedasticity (constant
+  variance). The residuals should be randomly scattered around zero with
+  no clear patterns. The green smooth line helps identify trends.
+\item
+  \textbf{Q-Q Plot}: Tests for normality of residuals. Points should
+  follow the red diagonal line if residuals are normally distributed.
+\item
+  \textbf{Residuals vs Predictors}: Helps identify if there are patterns
+  in residuals related to specific predictors, which might indicate
+  non-linear relationships or missing terms.
+\end{enumerate}
+
+\section{Visualizations}\label{visualizations}
+
+\subsection{Scatter Plots: Predictors vs
+Response}\label{scatter-plots-predictors-vs-response}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Scatter plots of key predictors vs medv}
+\NormalTok{p6 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(boston, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ rm, }\AttributeTok{y =}\NormalTok{ medv)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{color =} \StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{linewidth =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Average Number of Rooms vs Median Home Value"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Average Number of Rooms"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Median Home Value ($1000s)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{))}
+
+\FunctionTok{print}\NormalTok{(p6)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{regression_analysis_files/figure-latex/scatter-plots-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p7 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(boston, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ lstat, }\AttributeTok{y =}\NormalTok{ medv)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{color =} \StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{linewidth =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Lower Status Population \% vs Median Home Value"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Lower Status Population (\%)"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Median Home Value ($1000s)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{))}
+
+\FunctionTok{print}\NormalTok{(p7)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{regression_analysis_files/figure-latex/scatter-plots-2} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p8 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(boston, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ nox, }\AttributeTok{y =}\NormalTok{ medv)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{color =} \StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{linewidth =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Nitric Oxide Concentration vs Median Home Value"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Nitric Oxide Concentration (parts per 10 million)"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Median Home Value ($1000s)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{))}
+
+\FunctionTok{print}\NormalTok{(p8)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{regression_analysis_files/figure-latex/scatter-plots-3} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p9 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(boston, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ crim, }\AttributeTok{y =}\NormalTok{ medv)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{color =} \StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{linewidth =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Crime Rate vs Median Home Value"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Per Capita Crime Rate"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Median Home Value ($1000s)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{face =} \StringTok{"bold"}\NormalTok{))}
+
+\FunctionTok{print}\NormalTok{(p9)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{regression_analysis_files/figure-latex/scatter-plots-4} \end{center}
+
+\section{Appendix: Variable
+Definitions}\label{appendix-variable-definitions}
+
+The following table provides definitions for all variables in the Boston
+Housing Dataset:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create variable definitions table}
+\NormalTok{variable\_definitions }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Variable =} \FunctionTok{c}\NormalTok{(}\StringTok{"crim"}\NormalTok{, }\StringTok{"zn"}\NormalTok{, }\StringTok{"indus"}\NormalTok{, }\StringTok{"chas"}\NormalTok{, }\StringTok{"nox"}\NormalTok{, }\StringTok{"rm"}\NormalTok{, }\StringTok{"age"}\NormalTok{, }\StringTok{"dis"}\NormalTok{, }
+               \StringTok{"rad"}\NormalTok{, }\StringTok{"tax"}\NormalTok{, }\StringTok{"ptratio"}\NormalTok{, }\StringTok{"black"}\NormalTok{, }\StringTok{"lstat"}\NormalTok{, }\StringTok{"medv"}\NormalTok{),}
+  \AttributeTok{Description =} \FunctionTok{c}\NormalTok{(}
+    \StringTok{"Per capita crime rate by town"}\NormalTok{,}
+    \StringTok{"Proportion of residential land zoned for lots over 25,000 sq.ft."}\NormalTok{,}
+    \StringTok{"Proportion of non{-}retail business acres per town"}\NormalTok{,}
+    \StringTok{"Charles River dummy variable (1 if tract bounds river; 0 otherwise)"}\NormalTok{,}
+    \StringTok{"Nitric oxides concentration (parts per 10 million)"}\NormalTok{,}
+    \StringTok{"Average number of rooms per dwelling"}\NormalTok{,}
+    \StringTok{"Proportion of owner{-}occupied units built prior to 1940"}\NormalTok{,}
+    \StringTok{"Weighted distances to five Boston employment centres"}\NormalTok{,}
+    \StringTok{"Index of accessibility to radial highways"}\NormalTok{,}
+    \StringTok{"Full{-}value property{-}tax rate per $10,000"}\NormalTok{,}
+    \StringTok{"Pupil{-}teacher ratio by town"}\NormalTok{,}
+    \StringTok{"1000(Bk {-} 0.63)\^{}2 where Bk is the proportion of blacks by town"}\NormalTok{,}
+    \StringTok{"Lower status of the population (percent)"}\NormalTok{,}
+    \StringTok{"Median value of owner{-}occupied homes in $1000s"}
+\NormalTok{  ),}
+  \AttributeTok{Units\_Scale =} \FunctionTok{c}\NormalTok{(}
+    \StringTok{"Continuous"}\NormalTok{,}
+    \StringTok{"Proportion (0{-}100)"}\NormalTok{,}
+    \StringTok{"Proportion (0{-}100)"}\NormalTok{,}
+    \StringTok{"Binary (0 or 1)"}\NormalTok{,}
+    \StringTok{"Parts per 10 million"}\NormalTok{,}
+    \StringTok{"Average number"}\NormalTok{,}
+    \StringTok{"Proportion (0{-}100)"}\NormalTok{,}
+    \StringTok{"Weighted distance"}\NormalTok{,}
+    \StringTok{"Index"}\NormalTok{,}
+    \StringTok{"Rate per $10,000"}\NormalTok{,}
+    \StringTok{"Ratio"}\NormalTok{,}
+    \StringTok{"Transformed proportion"}\NormalTok{,}
+    \StringTok{"Percent"}\NormalTok{,}
+    \StringTok{"$1000s"}
+\NormalTok{  )}
+\NormalTok{)}
+
+\FunctionTok{kable}\NormalTok{(variable\_definitions, }\AttributeTok{caption =} \StringTok{"Variable Definitions for Boston Housing Dataset"}\NormalTok{,}
+      \AttributeTok{col.names =} \FunctionTok{c}\NormalTok{(}\StringTok{"Variable"}\NormalTok{, }\StringTok{"Description"}\NormalTok{, }\StringTok{"Units/Scale"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{latex\_options =} \FunctionTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"hold\_position"}\NormalTok{), }\AttributeTok{font\_size =} \DecValTok{9}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{column\_spec}\NormalTok{(}\DecValTok{1}\NormalTok{, }\AttributeTok{bold =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{column\_spec}\NormalTok{(}\DecValTok{2}\NormalTok{, }\AttributeTok{width =} \StringTok{"8cm"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{column\_spec}\NormalTok{(}\DecValTok{3}\NormalTok{, }\AttributeTok{width =} \StringTok{"3cm"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begingroup\fontsize{9}{11}\selectfont
+
+\begin{longtable}[t]{>{}l>{\raggedright\arraybackslash}p{8cm}>{\raggedright\arraybackslash}p{3cm}}
+\caption{\label{tab:variable-definitions}Variable Definitions for Boston Housing Dataset}\\
+\toprule
+Variable & Description & Units/Scale\\
+\midrule
+\textbf{\cellcolor{gray!10}{crim}} & \cellcolor{gray!10}{Per capita crime rate by town} & \cellcolor{gray!10}{Continuous}\\
+\textbf{zn} & Proportion of residential land zoned for lots over 25,000 sq.ft. & Proportion (0-100)\\
+\textbf{\cellcolor{gray!10}{indus}} & \cellcolor{gray!10}{Proportion of non-retail business acres per town} & \cellcolor{gray!10}{Proportion (0-100)}\\
+\textbf{chas} & Charles River dummy variable (1 if tract bounds river; 0 otherwise) & Binary (0 or 1)\\
+\textbf{\cellcolor{gray!10}{nox}} & \cellcolor{gray!10}{Nitric oxides concentration (parts per 10 million)} & \cellcolor{gray!10}{Parts per 10 million}\\
+\addlinespace
+\textbf{rm} & Average number of rooms per dwelling & Average number\\
+\textbf{\cellcolor{gray!10}{age}} & \cellcolor{gray!10}{Proportion of owner-occupied units built prior to 1940} & \cellcolor{gray!10}{Proportion (0-100)}\\
+\textbf{dis} & Weighted distances to five Boston employment centres & Weighted distance\\
+\textbf{\cellcolor{gray!10}{rad}} & \cellcolor{gray!10}{Index of accessibility to radial highways} & \cellcolor{gray!10}{Index}\\
+\textbf{tax} & Full-value property-tax rate per \$10,000 & Rate per \$10,000\\
+\addlinespace
+\textbf{\cellcolor{gray!10}{ptratio}} & \cellcolor{gray!10}{Pupil-teacher ratio by town} & \cellcolor{gray!10}{Ratio}\\
+\textbf{black} & 1000(Bk - 0.63)\textasciicircum{}2 where Bk is the proportion of blacks by town & Transformed proportion\\
+\textbf{\cellcolor{gray!10}{lstat}} & \cellcolor{gray!10}{Lower status of the population (percent)} & \cellcolor{gray!10}{Percent}\\
+\textbf{medv} & Median value of owner-occupied homes in \$1000s & \$1000s\\
+\bottomrule
+\end{longtable}
+\endgroup{}
+
+\end{document}

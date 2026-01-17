@@ -223,16 +223,35 @@ function updatePrediction() {
 }
 
 /**
+ * Toggle form visibility
+ */
+function toggleForm() {
+    const mainContent = document.getElementById('main-content');
+    const toggleButton = document.getElementById('toggle-form');
+    
+    if (mainContent && toggleButton) {
+        mainContent.classList.toggle('visible');
+        toggleButton.classList.toggle('rotated');
+        
+        // If showing for the first time, populate dropdowns
+        if (mainContent.classList.contains('visible')) {
+            populateDropdowns();
+            updatePrediction();
+        }
+    }
+}
+
+/**
  * Initialize the application
  */
 function init() {
-    // Populate all dropdowns
-    populateDropdowns();
+    // Set up toggle button
+    const toggleButton = document.getElementById('toggle-form');
+    if (toggleButton) {
+        toggleButton.addEventListener('click', toggleForm);
+    }
     
-    // Calculate initial prediction
-    updatePrediction();
-    
-    // Add event listeners to all dropdowns
+    // Add event listeners to all dropdowns (will be populated when form is shown)
     Object.keys(VARIABLE_CONFIG).forEach(variableName => {
         const select = document.getElementById(variableName);
         if (select) {

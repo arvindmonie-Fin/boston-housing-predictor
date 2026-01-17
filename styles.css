@@ -51,6 +51,15 @@ header {
     color: #ffffff;
 }
 
+.centered-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    margin-bottom: 0;
+}
+
 header h1 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
@@ -61,6 +70,58 @@ header h1 {
     font-size: 1.1rem;
     color: #e0e0e0;
     font-weight: 300;
+    margin-bottom: 2rem;
+}
+
+.down-arrow {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #ffffff;
+    margin-top: 1rem;
+    backdrop-filter: blur(10px);
+}
+
+.down-arrow:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: translateY(5px);
+}
+
+.down-arrow:active {
+    transform: translateY(8px);
+}
+
+.down-arrow svg {
+    transition: transform 0.3s ease;
+}
+
+.down-arrow.rotated svg {
+    transform: rotate(180deg);
+}
+
+#main-content {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease, max-height 0.5s ease;
+}
+
+#main-content.visible {
+    opacity: 1;
+    max-height: 5000px;
+    overflow: visible;
+}
+
+.hidden {
+    display: none;
 }
 
 .prediction-form {
@@ -153,12 +214,26 @@ header h1 {
         padding: 1rem;
     }
     
+    .centered-header {
+        min-height: 60vh;
+    }
+    
     header h1 {
         font-size: 2rem;
     }
     
     .subtitle {
         font-size: 1rem;
+    }
+    
+    .down-arrow {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .down-arrow svg {
+        width: 30px;
+        height: 30px;
     }
     
     .prediction-form {
