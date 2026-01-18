@@ -112,16 +112,14 @@ header h1 {
     max-height: 0;
     overflow: hidden;
     transition: opacity 0.5s ease, max-height 0.5s ease;
+    visibility: hidden;
 }
 
 #main-content.visible {
     opacity: 1;
     max-height: 5000px;
     overflow: visible;
-}
-
-.hidden {
-    display: none;
+    visibility: visible;
 }
 
 .prediction-form {
