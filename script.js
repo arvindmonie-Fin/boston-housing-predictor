@@ -192,10 +192,15 @@ function calculatePrediction() {
 
 /**
  * Format price for display
+ * The regression model outputs prices in thousands of dollars (e.g., 24.5 = $24,500)
+ * This function converts to actual dollars by multiplying by 1000
  */
 function formatPrice(price) {
-    // Price is in thousands, convert to full dollars
-    const fullPrice = price * 1000;
+    // Ensure price is a number
+    const priceValue = parseFloat(price) || 0;
+    // Convert from thousands to actual dollars
+    const fullPrice = priceValue * 1000;
+    // Format as US currency with no decimal places
     return new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
